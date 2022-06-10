@@ -1,7 +1,7 @@
 workspace(name = "rules_antlr")
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_jar")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_jar")
 
 local_repository(
     name = "examples",
@@ -30,18 +30,27 @@ load("//antlr:repositories.bzl", "rules_antlr_dependencies")
 
 rules_antlr_dependencies(2, 3, 4)
 
-git_repository(
+# git_repository(
+#     name = "io_bazel_stardoc",
+#     remote = "https://github.com/bazelbuild/stardoc.git",
+#     tag = "0.4.0",
+# )
+
+http_archive(
     name = "io_bazel_stardoc",
-    remote = "https://github.com/bazelbuild/stardoc.git",
-    tag = "0.4.0",
+    sha256 = "aa814dae0ac400bbab2e8881f9915c6f47c49664bf087c409a15f90438d2c23e",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/stardoc/releases/download/0.5.1/stardoc-0.5.1.tar.gz",
+        "https://github.com/bazelbuild/stardoc/releases/download/0.5.1/stardoc-0.5.1.tar.gz",
+    ],
 )
 
 load("@io_bazel_stardoc//:setup.bzl", "stardoc_repositories")
 
 stardoc_repositories()
 
-git_repository(
-    name = "stardoc_templates",
-    remote = "https://github.com/marcohu/stardoc_templates.git",
-    tag = "0.1.0",
-)
+# git_repository(
+#     name = "stardoc_templates",
+#     remote = "https://github.com/marcohu/stardoc_templates.git",
+#     tag = "0.1.0",
+# )

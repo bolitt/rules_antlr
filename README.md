@@ -1,9 +1,11 @@
-[![Build Status](https://travis-ci.org/marcohu/rules_antlr.png?branch=master)](https://travis-ci.org/marcohu/rules_antlr)
+[![Build Status](https://travis-ci.org/bolitt/rules_antlr.png?branch=master)](https://travis-ci.org/bolitt/rules_antlr)
 [![Java 8+](https://img.shields.io/badge/java-8+-4c7e9f.svg)](https://java.oracle.com)
 [![License](https://img.shields.io/badge/license-Apache2-blue.svg)](https://github.com/marcohu/rules_antlr/blob/master/LICENSE)
 
-
 # ANTLR Rules for Bazel
+
+(Update: Jun 10, 2022) This repo is forked from https://github.com/marcohu/rules_antlr
+by updating bazel dependencies and fixing build errors.
 
 These build rules are used for processing [ANTLR](https://www.antlr.org)
 grammars with [Bazel](https://bazel.build/).
