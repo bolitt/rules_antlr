@@ -5,14 +5,15 @@ antlr(
     name = "generated",
     srcs = glob(["*.g4"]),
     language = "Go",
+    package = "json",
 )
 
 go_library(
-    name = "parser",
+    name = "json",
     srcs = [
         ":generated",
     ],
-    importpath = "github.com/example/com/json/parser",
+    importpath = "github.com/example/com/parser/json",
     visibility = ["//visibility:public"],
     deps = [
         "@antlr4_runtimes//:go",
@@ -25,7 +26,7 @@ go_binary(
         "main.go",
     ],
     deps = [
-        ":parser",
+        ":json",
         "@antlr4_runtimes//:go",
     ],
 )

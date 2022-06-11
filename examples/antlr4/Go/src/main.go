@@ -7,7 +7,7 @@ import (
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
-	"github.com/example/com/json/parser"
+	"github.com/example/com/parser/json"
 )
 
 func demoLexer(input string) {
@@ -15,7 +15,7 @@ func demoLexer(input string) {
 	is := antlr.NewInputStream(input)
 
 	// Create the Lexer
-	lexer := parser.NewJSONLexer(is)
+	lexer := json.NewJSONLexer(is)
 
 	// Read all tokens
 	for {
@@ -29,22 +29,35 @@ func demoLexer(input string) {
 }
 
 type jsonListener struct {
-	*parser.BaseJSONListener
+	*json.BaseJSONListener
+}
+
+func (l *jsonListener) EnterObj(ctx *json.ObjContext) {
+	fmt.Printf("Object: %s\n", ctx.GetText())
+}
+
+func (l *jsonListener) EnterPair(ctx *json.PairContext) {
+	fmt.Printf("Pair: %s\n", ctx.GetText())
+}
+
+func (l *jsonListener) EnterArray(ctx *json.ArrayContext) {
+	fmt.Printf("Array: %s\n", ctx.GetText())
 }
 
 func demoParser(input string) {
 	// Setup the input
 	is := antlr.NewInputStream(input)
 
-	lexer := parser.NewJSONLexer(is)
+	lexer := json.NewJSONLexer(is)
 	tokenStream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
 
 	// Create the Parser
-	p := parser.NewJSONParser(tokenStream)
+	p := json.NewJSONParser(tokenStream)
 
 	// Finally parse the expression (by walking the tree)
 	var listener jsonListener
-	antlr.ParseTreeWalkerDefault.Walk(&listener, p.Json())
+	tree := p.Json()
+	antlr.ParseTreeWalkerDefault.Walk(&listener, tree)
 }
 
 func main() {
