@@ -30,12 +30,6 @@ load("//antlr:repositories.bzl", "rules_antlr_dependencies")
 
 rules_antlr_dependencies(2, 3, 4)
 
-# git_repository(
-#     name = "io_bazel_stardoc",
-#     remote = "https://github.com/bazelbuild/stardoc.git",
-#     tag = "0.4.0",
-# )
-
 http_archive(
     name = "io_bazel_stardoc",
     sha256 = "aa814dae0ac400bbab2e8881f9915c6f47c49664bf087c409a15f90438d2c23e",
@@ -48,9 +42,3 @@ http_archive(
 load("@io_bazel_stardoc//:setup.bzl", "stardoc_repositories")
 
 stardoc_repositories()
-
-# git_repository(
-#     name = "stardoc_templates",
-#     remote = "https://github.com/marcohu/stardoc_templates.git",
-#     tag = "0.1.0",
-# )
